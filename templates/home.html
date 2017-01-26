@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{%load staticfiles%}
+{%load static %}
+<head>
+<script src="{% static 'js/home.js' %}" ></script>
+<link href="{% static 'css/home.css' %}" rel="stylesheet" type="text/css">
+</head>
+
+{% block search %}
+<form id="search_form" name="search" action="/drivefitwheels/search/" method="get" >{% csrf_token %}
+	<p>If you dont want to specify every fields, you can leave them blank</p>
+	{{error.tire_size}}
+	<div class="clear"></div>
+	<div id="carSearch">
+		<label for="brand">Brand:</label>
+		<select id="brand" name="brand" onChange="getModelDetails()">
+			<option value="All">All</option>
+		</select>
+		<label for="model">Model:</label>
+		<select id="model" name="model" disabled="disabled">
+			<option value="All">All</option>
+		</select>
+		<label for="from">From (year):</label>
+		{{form.year_from}}
+		<label for="to">To (year):</label>
+		{{form.year_to}}
+	</div>
+	<div id="tireSearch">
+		<label for="ws">Wheel size:</label>
+		<select data-display="Select" name="wheel_size" id="ws">
+			<option value="All">All</option>
+			<option value="15">15"</option>
+			<option value="16">16"</option>
+			<option value="17">17"</option>
+			<option value="18">18"</option>
+			<option value="19">19"</option>
+			<option value="20">20"</option>
+			<option value="21">21"</option>
+		</select>
+		<label for="ww">Wheel width:</label>
+		<select data-display="Select" name="wheel_width" id="ww">
+			<option value="All">All</option>
+			<option value="6.0">6.0</option>
+			<option value="6.5">6.5</option>
+			<option value="7.0">7.0</option>
+			<option value="7.5">7.5</option>
+			<option value="8.0">8.0</option>
+			<option value="8.5">8.5</option>
+			<option value="9.0">9.0</option>
+			<option value="9.5">9.5</option>
+			<option value="10.0">10.0</option>
+			<option value="10.5">10.5</option>
+			<option value="11.0">11.0</option>
+			<option value="11.5">11.5</option>
+			<option value="12.0">12.0</option>
+		</select>
+		<label for="offset">Offset:</label>
+		{{form.offset}}
+		<label for="tireSize">Tire size: ex.: 225/45/17</label>
+		{{form.tire_size}}
+	</div>
+	<input type="hidden" name="search" value="user_search"/>
+	<button id="search_bt" type="submit" value="Find">Find</button>
+				
+</form>
+{%endblock%}
+
+{% block content %}
+{% endblock %}

@@ -1,0 +1,72 @@
+
+<div id="img">
+	<h3 style="text-decoration: underline; text-transform: uppercase">{{carInfo.year}} {{carInfo.brand}} {{carInfo.model}}</h3>
+	<div id="mainPic">
+		
+		{% if carImg %}
+		<img name="{{carImg.0.id}}" src="{{carImg.0.img.url}}" /><!--{{carImg.0.img.url}}-->
+		<img name="{{carImg.1.id}}" style="visibility:hidden;" src="{{carImg.1.img.url}}" />
+		<img name="{{carImg.2.id}}" style="visibility:hidden;" src="{{carImg.2.img.url}}" />
+		<img name="{{carImg.3.id}}" style="visibility:hidden;" src="{{carImg.3.img.url}}" />
+		{% endif %}
+	</div>
+	
+	<div id="inlinePics">
+	{% for im in carImg %}
+		<div class="thumbnail_container">
+			<img name="{{im.id}}" src="{{im.thumb.url}}" />
+		</div>
+	{% endfor %}
+	</div>
+
+</div>
+<div id="info">
+	{% if carInfo %}
+		<div id="info_container" style="margin-top:0px;">
+			<b><span style="text-decoration:underline;">Specs</span>: </b><br/>
+			
+			<b><span style="text-decoration:underline; color:#337ab7">Front</span>: </b><br/>
+			<b><span style="text-decoration:underline;">Wheel size</span>: </b>{{carInfo.f_wheelsize}} in.<br/>
+			<b><span style="text-decoration:underline;">Width</span>: </b>{{carInfo.f_width}} in.<br/>
+			<b><span style="text-decoration:underline;">Offset</span>: </b>{{carInfo.f_offset}} mm<br/>
+			<b><span style="text-decoration:underline;">Tire size</span>: </b>{{carInfo.f_tiresize}}<br/><br/>
+			
+			<b><span style="text-decoration:underline; color:#337ab7">Rear</span>: </b><br/>
+			<b><span style="text-decoration:underline;">Wheel size</span>: </b>{% if carInfo.r_wheelsize != Null %}{{carInfo.r_wheelsize}} in. {%else%}N/A{%endif%}<br/>
+			<b><span style="text-decoration:underline;">Width</span>: </b>{% if carInfo.r_width != Null %}{{carInfo.r_width}} in. {%else%}N/A{%endif%}<br/>
+			<b><span style="text-decoration:underline;">Offset</span>: </b>{% if carInfo.r_offset != Null %}{{carInfo.r_offset}} mm {%else%}N/A{%endif%}<br/>
+			<b><span style="text-decoration:underline;">Tire size</span>: </b>{% if carInfo.r_tiresize != Null %}{{carInfo.r_tiresize}}{%else%}N/A{%endif%}<br/><br/>
+			
+			<b><span style="text-decoration:underline;">Mods</span>: </b><br>
+			
+			{%if carInfo.suspension%}
+				<b>Suspension</b><br/>							
+				{%if carInfo.suspensionInfo != ''%}
+					<span>{{carInfo.suspensionInfo}}</span>
+				{%else%}
+					<span>No information</span>
+				{%endif%}
+				<br>
+			{%endif%}
+			
+			{%if carInfo.spacer%}
+				<b>Spacers</b><br/>							
+				{%if carInfo.spacerInfo != ''%}
+					<span>{{carInfo.spacerInfo}}</span>
+				{%else%}
+					<span>No information</span>
+				{%endif%}
+				<br>
+			{%endif%}
+
+			{%if carInfo.fab%}
+				<b>Custom fabrication</b><br/>							
+				{%if carInfo.fabInfo != ''%}
+					<span>{{carInfo.fabInfo}}</span>
+				{%else%}
+					<span>No information</span>
+				{%endif%}
+			{%endif%}
+		</div>
+	{% endif %}
+</div>"

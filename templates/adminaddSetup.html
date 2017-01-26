@@ -1,0 +1,246 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Drive Fit Wheels Admin</title>
+		<meta charset="UTF-8">
+		<meta name="drive fit wheels" content="wheels fitting finder">
+
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<link href="{% static "css/style.css"%}" rel="stylesheet" type="text/css">
+		
+		<script src="{% static "js/jquery.js" %}" ></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>		
+		
+		<script>
+			function getBrandDetails(){
+				$.getJSON("{% static "json/brandInfo.json"%}",function(data){
+					$.each( data, function( key, val ) {
+						$.each( val, function( k, v ) {
+							$('#brand').append('<option value="'+v.brand+'">'+v.brand+'</option>');
+						});
+					});
+				});				
+			}
+			function getModelDetails(){
+				document.getElementById("model").disabled=false;
+				$("#model").empty();
+				var select=document.getElementById("brand");
+				var brand=select.options[select.selectedIndex].value;
+				if(brand=="All"){
+					document.getElementById("model").disabled=true;
+				}
+				$.getJSON("{% static "json/brandInfo.json"%}",function(data){
+					$.each( data, function( key, val ) {
+						$.each( val, function( k, v ) {
+							if(v.brand==brand){
+								$.each(v.model,function(k,v){
+									$('#model').append('<option value="'+v.name+'">'+v.name+'</option>');
+								});
+							}
+							
+						});
+					});
+				});				
+			}
+			
+			$(document).ready(function (){
+				console.log("infoBrand received");
+				$('#id_suspensionInfo,#id_spacerInfo,#id_fabInfo').attr("disabled","disabled");
+				$(document).click(function(event){
+					var target=event.target;
+					if($(target).attr('id')=="id_suspension"){
+						console.log("suspension");
+						if(target.checked){
+							$('#id_suspensionInfo').removeAttr("disabled");
+						}else{
+							$('#id_suspensionInfo').attr("disabled","disabled");
+						}
+					}else if($(target).attr('id')=="id_spacer"){
+						console.log("suspension");
+						if(target.checked){
+							$('#id_spacerInfo').removeAttr("disabled");
+						}else{
+							$('#id_spacerInfo').attr("disabled","disabled");
+						}
+					}else if($(target).attr('id')=="id_fab"){
+						console.log("suspension");
+						if(target.checked){
+							$('#id_fabInfo').removeAttr("disabled");
+						}else{
+							$('#id_fabInfo').attr("disabled","disabled");
+						}
+					}
+				});
+				getBrandDetails();
+				
+			});
+		</script>
+	</head>
+	<body>
+		<div id="content">
+			<header>
+				<h1 id="title"><a href="/">Drive Fit</a></h1>
+				<div id="contactus">
+					<b><span>Contact us:</span></br>
+					<span>drivefitwheels@gmail.com</span></b>
+				</div>	
+				<div style="font-size:17px;" id="warning_msg">
+					<p><span style="color:#337ab7"><b>ADMIN WARNING:</b></span></p><br/>
+					<p>Don't forget to valid the car entry in admin section after uploading it to make it public.</p>
+				</div>
+			</header>
+			<div id="addForm">
+				<form id="adminAddSetupForm" name="adminAddSetup" action="/drivefitwheelsadmin/addsetup/" method="post" enctype="multipart/form-data">{% csrf_token %} 
+					<hr>
+					<div id="modelInfo">
+						<label class="addSetupSection" for="brand">Brand:</label>
+						<select id="brand" name="brand" onChange="getModelDetails()">
+							<option value="All">-</option>
+						</select>
+						<label class="addSetupSection" for="model">Model:</label>
+						<select id="model" name="model" disabled="disabled">
+						</select>
+						<div class="fieldWrapper">
+							{{ form.year.errors }}
+							<label class="addSetupSection" for="{{ form.year.id_for_label }}">Year</label>
+							{{ form.year }}
+						</div>
+					</div>
+					<hr>
+					<div id="wheelInfo">
+						<div id="frontWheelInfo" style="display:inline-block; width:50%;">	
+							<label class="addSetupSection" for="model">Front wheels: </label>			
+							<div>
+								{{ form.non_field_errors }}
+								<div class="fieldWrapper">
+									{{ form.f_wheelsize.errors }}
+									<label style="margin-top:0px;" for="{{ form.f_wheelsize.id_for_label }}">Front wheel size</label>
+									{{ form.f_wheelsize }}
+								</div>
+								<div class="fieldWrapper">
+									{{ form.f_width.errors }}
+									<label for="{{ form.f_width.id_for_label }}">Front width</label>
+									{{ form.f_width }}
+								</div>
+							</div>
+							
+							<div>
+								<div class="fieldWrapper">
+									{{ form.f_offset.errors }}
+									<label for="{{ form.f_offset.id_for_label }}">Front offset</label>
+									{{ form.f_offset }}
+								</div>
+								<div class="fieldWrapper">
+									{{ form.f_tiresize.errors }}
+									<label for="{{ form.f_tiresize.id_for_label }}">Front tire size ex.: 225/45/17</label>
+									{{ form.f_tiresize }}
+								</div>
+							</div>						
+						</div>
+						<div id="rearWheelInfo" style="display:inline-block; width:49%;">	
+							<label class="addSetupSection" for="model">Rear wheels: </label>						
+							<div>
+								{{ form.non_field_errors }}
+								<div class="fieldWrapper">
+									{{ form.r_wheelsize.errors }}
+									<label style="margin-top:0px;" for="{{ form.r_wheelsize.id_for_label }}">Rear wheel size</label>
+									{{ form.r_wheelsize }}
+								</div>
+								<div class="fieldWrapper">
+									{{ form.r_width.errors }}
+									<label for="{{ form.r_width.id_for_label }}">Rear width</label>
+									{{ form.r_width }}
+								</div>
+							</div>
+							
+							<div>
+								<div class="fieldWrapper">
+									{{ form.r_offset.errors }}
+									<label for="{{ form.r_offset.id_for_label }}">Rear offset</label>
+									{{ form.r_offset }}
+								</div>
+								<div class="fieldWrapper">
+									{{ form.r_tiresize.errors }}
+									<label for="{{ form.r_tiresize.id_for_label }}">Rear Tire size ex.: 225/45/17</label>
+									{{ form.r_tiresize }}
+								</div>
+							</div>							
+						</div>
+					</div>
+					<hr>
+					<div id="optionInfo">
+						<div class="fieldWrapper">
+							{{ form.suspension.errors }}
+							<label class="addSetupSection" for="{{ form.suspension.id_for_label }}">Suspension</label>
+							{{ form.suspension }}
+						</div>	
+						<div class="fieldWrapper">
+							{{ form.suspensionInfo.errors }}
+							<label class="addSetupSection" for="{{ form.suspensionInfo.id_for_label }}">Detail</label>
+							{{ form.suspensionInfo }}
+						</div>	
+						<div class="fieldWrapper">
+							{{ form.spacer.errors }}
+							<label class="addSetupSection" for="{{ form.spacer.id_for_label }}">Spacer</label>
+							{{ form.spacer }}
+						</div>	
+						<div class="fieldWrapper">
+							{{ form.spacerInfo.errors }}
+							<label class="addSetupSection" for="{{ form.spacerInfo.id_for_label }}">Detail</label>
+							{{ form.spacerInfo }}
+						</div>	
+						<div class="fieldWrapper">
+							{{ form.fab.errors }}
+							<label class="addSetupSection" for="{{ form.fab.id_for_label }}">Fab</label>
+							{{ form.fab }}
+						</div>	
+						<div class="fieldWrapper">
+							{{ form.fabInfo.errors }}
+							<label class="addSetupSection" for="{{ form.fabInfo.id_for_label }}">Detail</label>
+							{{ form.fabInfo }}
+						</div>	
+					</div>
+					<hr>
+					<div id="imagesInfo">
+						<div class="fieldWrapper">
+							{{ form.img1.errors }}
+							<label class="addSetupSection" for="{{ form.img1.id_for_label }}">Image 1</label>
+							{{ form.img1 }}
+						</div>	
+						<div class="fieldWrapper">
+							{{ form.img2.errors }}
+							<label class="addSetupSection" for="{{ form.img2.id_for_label }}">Image 2</label>
+							{{ form.img2 }}
+						</div>	
+						<div class="fieldWrapper">
+							{{ form.img3.errors }}
+							<label class="addSetupSection" for="{{ form.img3.id_for_label }}">Image 3</label>
+							{{ form.img3 }}
+						</div>						
+						<div class="fieldWrapper">
+							{{ form.img4.errors }}
+							<label class="addSetupSection" for="{{ form.img4.id_for_label }}">Image 4</label>
+							{{ form.img4 }}
+						</div>	
+					</div>		
+					<hr>
+					<div id="contactInfo">
+						<div class="fieldWrapper">
+							{{ form.email.errors }}
+							<label class="addSetupSection" for="{{ form.email.id_for_label }}">Email</label>
+							{{ form.email }}
+						</div>	
+					</div>	
+					
+					<button id="submitSetup" type="submit" value="Submit">Submit</button>
+				</form>
+			</div>	
+			<footer>
+				<P>Copyright Drive Fit Wheels 2016</p>
+			</footer>
+		</div>
+
+		</div>
+	</body>
+</html>

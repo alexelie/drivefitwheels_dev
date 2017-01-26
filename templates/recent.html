@@ -1,0 +1,65 @@
+{% extends "home.html" %}
+{% block content %}
+<div id="setupContent">
+	<h2><b>Recent setup</b></h2>
+	<div class="section">	
+		{% if cars %}
+		{% for car in cars  %}
+			<div class="setupThumb">
+				
+				<div class="modif">
+					<!--<a href="/drivefitwheels/?id={{car.id}}">+</a>-->
+					{% ifequal car.suspension 1 %}
+					<div data-ot="<b style='text-transform:uppercase'>Suspension info:</b><br/>{% if car.suspensionInfo != ''%}<span>{{car.suspensionInfo}}</span>{%else%}N/A{% endif %}" data-ot-fixed="true" class="mod_icon" id="modSuspension">
+						<!-- <span>Su</span> -->
+					</div>
+					{% endifequal%}
+								
+					{% ifequal car.spacer 1 %}
+					<div data-ot="<b style='text-transform:uppercase'>Spacer info:</b><br/>{% if car.spacerInfo != ''%}<span>{{car.spacerInfo}}</span>{%else%}N/A{% endif %}" data-ot-fixed="true" class="mod_icon" id="modSpacer">
+						<!-- <span>Sp</span> -->
+					</div>
+					{% endifequal%}			
+					
+					{% ifequal car.fab 1 %}
+					<div data-ot="<b style='text-transform:uppercase'>Custom fabrication info:</b><br/>{% if car.fabInfo != ''%}<span>{{car.fabInfo}}</span>{%else%}N/A{% endif %}" data-ot-fixed="true" class="mod_icon" id="modFab">
+						<!-- <span>Fa</span> -->
+					</div>
+					{% endifequal%}
+				</div>
+				<div class="info">
+					<p>				
+						<span style="text-transform: uppercase;"><b>{{car.year}} {{car.brand}}</b></span><br>
+						<span style="text-transform: uppercase;"><b>{{car.model}}</b></span><br>
+						<span><b>Front:</b></span>
+						{%if car.f_width == Null or car.f_offset == Null or car.f_tiresize == Null%}
+							<span>N/A</span>
+						{%else%}
+							{{car.f_width}} in. et. {{car.f_offset}}<br>
+							{{car.f_tiresize}}<br>
+						{%endif%}
+						<span><b>Rear:</b></span>
+						{%if car.r_width == Null or car.r_offset == Null or car.r_tiresize == Null%}
+							<span>N/A</span>
+						{%else%}
+							{{car.r_width}} in. et. {{car.r_offset}}<br>
+							{{car.r_tiresize}}<br>
+						{%endif%}
+					</p>
+				</div>
+				<div class="pics">
+					<a href="/drivefitwheels/?id={{car.id}}">View</a>
+				</div>
+			</div>
+		{% endfor %}
+		{%endif%}
+	</div>
+	{%if currentPage.has_next%}
+		<a class="paging paging_bt" href="/drivefitwheels/?page={{currentPage.next_page_number}}">Next</a>
+	{%endif%}
+	{%if currentPage.has_previous%}
+		<a class="paging paging_bt" href="/drivefitwheels/?page={{currentPage.previous_page_number}}">Previous</a>
+	{%endif%}
+</div>
+
+{% endblock %}

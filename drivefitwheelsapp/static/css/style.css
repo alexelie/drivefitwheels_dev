@@ -1,0 +1,578 @@
+@font-face {
+font-family: qanelabold;
+src: url("../fonts/QanelasSoftDEMO-ExtraBold.otf") format("opentype");
+}
+@font-face {
+font-family: qanelalight;
+src: url("../fonts/QanelasSoftDEMO-UltraLight.otf") format("opentype");
+}
+a{
+	color:white;
+	text-decoration:none;
+}
+p,h3,h2,h1{
+	margin:0;
+}
+p{
+	font-size:13px;
+	color:white;
+}
+label{
+	
+	font-size:13px;
+}
+select{
+	color:black;
+	display:block;
+	font-size:13px;
+}
+input[type="checkbox"]{
+	margin-bottom:5px;
+}
+input:not(#search_bt):not(#submitSetup){
+	color:black;
+	font-size:13px;
+}
+body{
+	background-color:#f1f1f1;
+	color:white;
+	margin:0;
+}
+#contactus{
+	position:absolute;
+	right:0px;
+	top:0px;
+	margin-top:13px;
+}
+#infoHover #dialog_close_bt{
+	position:absolute;
+	top:-8px;
+	right:-8px;
+	width:30px;
+	height:30px;
+	z-index:999;
+	cursor:pointer;
+}
+#infoHover{
+	position:fixed;
+	margin:0 auto;
+	margin-top:50px;
+	z-index:1;
+	visibility:hidden;
+	left:0;
+	right:0;
+	max-width:850px;
+	min-width:300px;
+	background-color:#f1f1f1;
+}
+#infoHover #contentHover{
+	position:relative;
+	background-color:#f1f1f1;
+	margin:15px;
+	height:625px;
+	min-height:400px;
+
+}
+#infoHover #contentHover #img{
+	float:left;	
+	width:72%;
+	height:100%;
+	position:relative;
+	background-color:white;
+}
+#infoHover #contentHover #img h3{
+	padding-left:20px;
+	font-size:1.5em;
+	height:40px;
+	color:grey;
+	text-decoration:overline;
+	font-weight:bold;
+	background-color:#f1f1f1;
+}
+#infoHover #contentHover #img #mainPic{
+	height:75%;
+	position:relative;
+	background-color:#f9f9f9;
+	-moz-box-shadow:inset 0 0 5px #999999;
+	-webkit-box-shadow:inset 0 0 5px #999999;
+	box-shadow:inset 0 0 5px #999999;
+}
+#infoHover #contentHover #img #mainPic img{
+	max-width:95%;
+	max-height:95%;
+	position:absolute;
+	margin:auto;
+	left:0;
+	right:0;
+	top:0;
+	bottom:0;
+}
+#infoHover #contentHover #img #inlinePics{
+	padding-top:15px;
+	background-color:#f1f1f1;
+	height:120px;
+}
+#infoHover #contentHover #img #inlinePics .thumbnail_container{
+	display:inline-block;
+	max-width:23.5%;
+	height:90px;
+	background-color:black;
+	overflow:hidden;
+}
+#infoHover #contentHover #img #inlinePics img{
+	width:135px;
+	cursor:pointer;
+	padding:0;
+}
+
+#infoHover #contentHover #info{
+	float:right;
+	width:28%;
+	height:100%;
+}
+#infoHover #contentHover #info #info_container{
+	padding-left:10px;
+	font-size:17px;
+}
+#infoHover #contentHover #info div{
+	font-size:1.5em;
+	margin:10px;
+	margin-top:20px;
+	color:grey;
+}
+header{
+	width:85%;
+	margin:0 auto;
+	position:relative;
+}
+header #addSetup{
+	margin-bottom:15px;
+	margin-top:30px;
+}
+header p{
+	
+	font-size:17px;
+}
+header #title{
+	margin-left:-5px;
+}
+header #title a span{
+	display:inline-block;
+	margin:0px;
+	padding:0px;
+	color:white;
+	text-decoration:none;
+}
+header #title a span#small_txt{
+	font-size:45px;
+}
+header #title a span#big_txt{
+	font-size:100px;
+}
+
+header #title a span:visited{
+	font-size:100px;
+	margin:0px;
+	padding:0px;
+	color:white;
+}
+header #title a span:hover{
+	margin:0px;
+	padding:0px;
+	font-size:100px;
+	color:#f1f1f1;
+	text-decoration:none;
+}
+header #title a span:active{
+	margin:0px;
+	padding:0px;
+	font-size:100px;
+	text-decoration:none;
+	color:white;
+}
+#search{
+	margin:30px 0px;
+}
+#search form{
+	width:85%;
+	margin:0 auto;
+	overflow:auto;
+}
+#addForm{
+	font-size:1.5em;
+	margin:30px 0px;
+}
+#addForm form{
+	width:85%;
+	margin:0 auto;
+	overflow:auto;
+}
+#addForm label[for="id_suspensionInfo"],label[for="id_spacerInfo"],label[for="id_fabInfo"]{
+	display:none;
+}
+#addForm label,button[type="submit"]{
+	margin-top:15px;
+}
+#addForm input[type=file]{
+	color:grey;
+}
+#addForm #imagesInfo input{
+	color:white;
+}
+#search{
+	font-size:1.2em;
+}
+#search label,select,input{
+	
+}
+#search input[type=text], input[type=number], input[type=email]{	
+	background-color:#f1f1f1
+}
+
+#search select{
+	background-color:#f1f1f1	
+}
+#search label{
+	margin-top:10px;
+	margin-bottom:0px;
+	display:block;
+}
+#carSearch{
+	width:40%;
+	float:left;
+}
+#carSearch #yearSelect{
+	width:30%;
+	min-width:200px;
+}
+#carSearch #yearSelect label{
+	display:inline-block;
+	min-width:30%;
+}
+#carSearch #yearSelect input, button{
+	display:inline-block;
+	margin:0px;
+	padding:0px;
+}
+
+#carSearch select,input, button {
+	display:block;
+	zmargin-right:5px;
+	clear:both;
+
+}
+#search button[type="submit"]{
+	float:left;
+	margin-top:15px;
+}
+#tireSearch{
+	swidth:70%;
+	float:left;
+
+}
+#tireSearch select,input,label {
+	display:block;
+	margin-right:5px;
+	clear:both;
+
+}
+#content{
+	overflow:auto;
+	background-color:black;
+	max-width:950px;
+	margin:0 auto;
+	padding:0;
+	padding-top:10px;
+	position:relative;
+}
+#setupContent{
+	width:85%;
+	margin:0 auto;
+	
+	
+}
+#setupContent h2{
+	color:white;
+	margin-left:5px;
+	font-size:20px;
+	margin-bottom:10px;
+}
+#setupContent .paging{
+	color:white;
+	margin-left:5px;
+	margin-top:15px;
+	zzfont-family:arial;
+	text-align:center;
+	display:block;
+	zzfont-size:20px;
+	zzfont-weight:bold;
+}
+.paging_bt{
+	zzwidth:90px;
+	padding-top:10px;
+	padding-bottom:10px;
+	padding-left:10px;
+	padding-right:10px;
+	background-color: #337ab7;
+	border-radius:3px;
+    border: none;
+    color: white;
+	margin-top:30px;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+
+}
+.paging_bt:hover{
+	background-color: #767676;
+	padding-top:10px;
+	padding-bottom:10px;
+	border-radius:3px;
+    border: none;
+    color: white;
+	margin-top:30px;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+}
+#setupContent .section{
+	zzbackground-color:red;
+	overflow:auto;
+	zzheight:500px;
+	padding-bottom:20px;
+}
+#setupContent .section .header{
+	width:100%;
+	background-color:grey;
+}
+
+#setupContent .section .header .title{
+	margin-left:5px;
+}
+#setupContent .section .setupThumb .pics{
+	position:absolute;
+	bottom:2px;
+	width:100%;
+	font-size:1.5em;
+}
+#setupContent .section .setupThumb .pics a{
+	margin-bottom:0px;
+	background-color: #337ab7;
+	zzborder-radius:3px;
+    border: none;
+    color: white;
+    text-align: center;
+    display: block;
+	width:100%;
+	text-decoration:none;
+}
+#setupContent .section .setupThumb .pics a:hover{
+	margin-bottom:0px;
+	background-color: #606060;
+	border-radius:3px;
+    border: none;
+    color: white;
+    text-align: center;
+    display: block;
+	width:100%;
+	
+}
+#setupContent .section .setupThumb{
+	position:relative;
+	width:140px;
+	height:183px;
+	margin:8px;
+	margin-left:12.7px;
+	float:left;
+	background-color:#646464;
+	border:4px solid #767676;
+	text-shadow: 2px 2px 4px #444444;
+}
+#setupContent .section .setupThumb:hover{
+	width:140px;
+	height:183px;
+	margin:8px;
+	margin-left:12.7px;
+	float:left;
+	border:4px solid #747474;
+	background-color:#747474;
+	text-shadow: 2px 2px 4px #444444;
+}
+#setupContent .section .setupThumb .modif{
+	height:25px;
+	padding-top:1px;
+	padding-right:1px;
+	background-color:#767676;
+}
+#setupContent .section .setupThumb .modif #modSuspension{
+	background-color:white;
+}
+#setupContent .section .setupThumb .modif #modSpacer{
+	background-color:black;
+}
+#setupContent .section .setupThumb .modif #modFab{
+	background-color:#337ab7;
+}
+#setupContent .section .setupThumb .info{
+	width:100%;
+	margin:5px;
+	font-family:arial;
+	zzfont-size:12px;
+}
+#setupContent .section .setupThumb .info p{
+	width:100%;
+	margin-right:5px;
+}
+#addForm label{
+	font-size:15px;
+}
+#addForm input[type=text], input[type=number]{	
+	background-color:#f1f1f1
+}
+#addForm select{
+	background-color:#f1f1f1
+}
+footer{
+	width:85%;
+	margin:0 auto;
+	margin-top:30px;
+	background-color:black;
+	color:white;
+}
+#search_bt{
+	background-color: #337ab7;
+	border-radius:3px;
+    border: none;
+    color: white;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 13px;
+	font-weight:bold;	
+}
+#search_bt:hover{
+	cursor:pointer;
+	background-color: #767676;
+	border-radius:3px;
+    border: none;
+    color: white;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 13px;
+	font-weight:bold;
+}
+
+#addSetup{
+	background-color: #337ab7;
+	border-radius:3px;
+    border: none;
+    color: white;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+	font-family:arial;
+    font-size: 13px;
+	font-weight:bold;	
+}
+
+#addSetup:hover{
+	cursor:pointer;
+	background-color: #767676;
+	border-radius:3px;
+    border: none;
+    color: white;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 13px;
+	font-weight:bold;
+	
+}
+#submitSetup{
+	background-color: #337ab7;
+	border-radius:3px;
+    border: none;
+    color: white;
+    padding: 5px 10px;
+	margin-top:25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 13px;
+	font-weight:bold;	
+}
+#submitSetup:hover{
+	cursor:pointer;
+	background-color: #767676;
+	border-radius:3px;
+    border: none;
+    color: white;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 13px;
+	font-weight:bold;
+}
+#warning_msg{
+	margin-top:30px;
+}
+#succeed_msg{
+	cursor:pointer;
+	border-radius:3px;
+    border: none;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 13px;
+	font-weight:bold;	
+	color:#337ab7; 
+	background-color:#f1f1f1; 
+	padding:5px 10px;
+	margin-top:10px;		
+}
+.thumbnail_container{
+	cursor:pointer;
+}
+#addForm .addSetupSection{
+	color:#337ab7;
+	text-transform:uppercase;
+}
+.mod_icon{
+	text-align:center;
+	border-left: 2px solid #444444;
+	border-top: 2px solid #444444;
+	border-right: 2px solid #999999;
+	border-bottom: 2px solid #999999;
+	display:inline-block;
+	float:right;
+	width:20px;
+	height:20px;
+	margin-left:5px;
+}
+.mod_icon p{
+cursor:default;
+}
+label.error{
+	color:red;
+	display:inline-block;
+	padding:2px 10px;
+	background-color:white;
+	border:2px solid red;
+}
+ul.errorlist{
+	margin-top:5px;
+	color:red;
+	float:left;
+}
+.clear{
+	clear:both;
+}
+

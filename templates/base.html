@@ -1,0 +1,145 @@
+{%load static %}
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Drive Fit Wheels</title>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<link href="{% static "css/style.css"%}" rel="stylesheet" type="text/css">
+		<link href="{% static "css/opentip.css"%}" rel="stylesheet" type="text/css">
+		
+		<script src="{% static "js/jquery.js" %}" ></script>
+		<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.7/jquery.validate.min.js"></script>
+		
+		<script src="{% static "js/opentip-jquery.js" %}" ></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		
+		<meta charset="UTF-8">
+		<meta name="drive fit" content="wheels fitting finder">
+		<script>
+			function getBrandDetails(){
+				$.getJSON("{% static "json/brandInfo.json"%}",function(data){
+					$.each( data, function( key, val ) {
+						$.each( val, function( k, v ) {
+							$('#carSearch #brand').append('<option value="'+v.brand+'">'+v.brand+'</option>');
+						});
+					});
+				});				
+			}
+			function getModelDetails(){
+				
+				document.getElementById("model").disabled=false;
+				$("#model").empty();
+				var select=document.getElementById("brand");
+				var brand=select.options[select.selectedIndex].value;
+				if(brand=="All"){
+					document.getElementById("model").disabled=true;
+				}
+				$.getJSON("{% static "json/brandInfo.json"%}",function(data){
+					$('#carSearch #model').append('<option value="All">All</option>');
+					$.each( data, function( key, val ) {
+						$.each( val, function( k, v ) {
+							if(v.brand==brand){
+								$.each(v.model,function(k,v){
+									$('#carSearch #model').append('<option value="'+v.name+'">'+v.name+'</option>');
+								});
+							}
+							
+						});
+					});
+				});				
+			}
+			$(document).ready(function (){
+				
+				$.ajaxSetup({ cache: false });
+
+				//=========bt next/previous pour la section search============
+				$(".search_paging_bt").on('click',function(e){
+					e.preventDefault();
+					var page = $(this).data("page");
+					var input = $("<input>")
+				    .attr("type", "hidden")
+				    .attr("name", "page").val(page);
+					$('#search_form').append($(input));
+					
+					$("#search_form").submit();
+				})
+				
+				//============================================================
+				//============================================================
+				
+				$("#dialog_close_bt").on('click', function(){
+					$('#infoHover #mainPic img').css("visibility","hidden");
+					$('#infoHover').css("visibility","hidden");	
+				});
+				
+				$(document).click(function(e){
+					var target=e.target;
+					if($(target).is('.setupThumb .pics a')&& $('#infoHover').css("visibility")=="hidden"){
+						//console.log("AJAX");
+						e.preventDefault();
+						var link=$(target).attr('href');
+						$('#contentHover').html("");
+						$('#contentHover').load(link);
+						$('#infoHover').css("visibility","visible");
+					}
+					else if((!$(target).is('#infoHover,div,p,img')) && $('#infoHover').css("visibility")=="visible" ){
+						$('#infoHover #mainPic img').css("visibility","hidden");
+						$('#infoHover').css("visibility","hidden");
+					}
+					if($(target).is('#infoHover #inlinePics img')){
+						id=$(target).attr('name');
+						$('#infoHover #mainPic img').css("visibility","hidden");
+						$('#mainPic [name="'+id+'"]').css("visibility","visible");
+					}
+					if($(target).is('.thumbnail_container')){
+						id=$(target).find("img").attr('name');
+						$('#infoHover #mainPic img').css("visibility","hidden");
+						$('#mainPic [name="'+id+'"]').css("visibility","visible");
+					}
+					
+				});
+				console.log("infoBrand received");
+				getBrandDetails();
+				
+			});
+		</script>
+	</head>
+	<div id="infoHover">
+		<img id="dialog_close_bt" name="close_bt" src='{% static "images/close_bt.png" %}' />
+		<div id="contentHover">
+			<div id="info">
+			</div>
+			<div id="img">
+			</div>
+		</div>
+	</div>
+	<body>
+		<div id="content">
+			<header>
+				<h1 id="title" ><a href="/drivefitwheels/"><span id="big_txt">Drive Fit&nbsp;</span><span id="small_txt">Wheels</span></a></h1>
+				{% if succeed|length > 0 %}
+				<p id="succeed_msg">Thank you for posting on Drive Fit. Your setup will be reviewed and put online shortly.</p><br/>
+				{% endif %}
+				<a id="addSetup" href="/drivefitwheels/addSetup/">Add setup</a>
+				<p>Drive Fit is a fit finder for proper satisfaction of expensive wheels/tires setup</p>
+				<div id="contactus">
+					<b><span style="color:#337ab7;">Contact us:</span></br>
+					<span>drivefitwheels@gmail.com</span></b>
+				</div>			
+			</header>
+			<div id="search">
+		
+				{%block search%}
+				
+				{%endblock%}
+			</div>
+			{% block content %}
+			
+			{% endblock %}
+			<footer>
+				<P>Copyright Drive Fit Wheels 2016</p>
+			</footer>
+		</div>
+	</body>
+
+</html>
